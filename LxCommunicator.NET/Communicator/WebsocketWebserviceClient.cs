@@ -82,7 +82,7 @@ namespace Loxone.Communicator {
 		public override async Task Authenticate(TokenHandler handler) {
 			if (await MiniserverReachable()) {
 				WebSocket = new ClientWebSocket();
-				await WebSocket.ConnectAsync(new Uri($"ws://{IP}:{Port}/ws/rfc6455"), CancellationToken.None);
+				await WebSocket.ConnectAsync(new Uri($"wss://{IP}:{Port}/ws/rfc6455"), CancellationToken.None);
 				BeginListening();
 				string key = await Session.GetSessionKey();
 				string keyExchangeResponse = (await SendWebservice(new WebserviceRequest<string>($"jdev/sys/keyexchange/{key}", EncryptionType.None))).Value;
